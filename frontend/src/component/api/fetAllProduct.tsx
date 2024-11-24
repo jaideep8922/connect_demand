@@ -9,7 +9,7 @@ const allProductList = async () => {
     })
 
     if(!response.ok){
-        console.log("error")
+        console.log("error occured")
     }
 
     const data = response.json();
