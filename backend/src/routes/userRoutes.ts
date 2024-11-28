@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import { getAllUsers, createUser } from '../controllers/userRegister';
 
+// middleware
 const app = express();
 app.use(cors());
 
