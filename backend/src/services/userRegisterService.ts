@@ -5,7 +5,25 @@ export const getUsers = async () => {
 };
 
 export const addUser = async (userData:any) => {
-  return await prisma.user.create({
-    data: userData,
-  });
+  try {
+    const newUser = await prisma.user.create({
+      data: userData,
+    });
+    return newUser;
+  } catch (error) {
+    console.error('Error adding user to database:', error);
+    throw new Error('Failed to add user');
+  }
+};
+
+export const getUserById = async (id: number) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+    return user;
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    throw new Error('Failed to fetch user');
+  }
 };
