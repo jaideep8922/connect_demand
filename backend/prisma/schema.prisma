@@ -14,24 +14,23 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  userType     String
-  businessName String
-  phone        String
-  gstNumber    String
-  shopMarka    String?
-  transport    String?
-  pincode      String
-  city         String
-  state        String
-  filePath     String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  userType      String
+  businessName  String
+  businessOwner String
+  phone         String
+  gstNumber     String
+  shopMarka     String?
+  transport     String?
+  pincode       String
+  city          String
+  state         String
+  filePath      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
 }
 
 model Status {
-  id        Int     @id @default(autoincrement())
-  status    String
+  id     Int    @id @default(autoincrement())
+  status String
 }
-
-

@@ -39,6 +39,7 @@ export const onBoardUser = async (req: any, res: any) => {
   try {
     const { userType,
       businessName,
+      businessOwner,
       phone,
       gstNumber,
       shopMarka,
@@ -57,6 +58,7 @@ export const onBoardUser = async (req: any, res: any) => {
     
     const newUser = await addUser({ userType,
       businessName,
+      businessOwner,
       phone,
       gstNumber,
       shopMarka,
