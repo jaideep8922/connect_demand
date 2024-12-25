@@ -13,9 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            Int      @id @default(autoincrement())
-  userType      String
+// model User {
+//   id            Int      @id @default(autoincrement())
+//   userType      String
+//   businessName  String
+//   businessOwner String
+//   phone         String
+//   gstNumber     String
+//   shopMarka     String?
+//   transport     String?
+//   pincode       String
+//   city          String
+//   state         String
+//   filePath      String?
+//   createdAt     DateTime @default(now())
+//   updatedAt     DateTime @default(now())
+// }
+
+model Status {
+  id     Int    @id @default(autoincrement())
+  status String
+}
+
+model Seller {
+  id            Int        @id @default(autoincrement())
   businessName  String
   businessOwner String
   phone         String
@@ -26,11 +47,38 @@ model User {
   city          String
   state         String
   filePath      String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
+  // qrCode        String    @unique
+  createdAt     DateTime   @default(now())
+  retailers     Retailer[]
+  Product       Product[]
 }
 
-model Status {
-  id     Int    @id @default(autoincrement())
-  status String
+model Retailer {
+  id            Int      @id @default(autoincrement())
+  businessName  String
+  businessOwner String
+  phone         String
+  gstNumber     String
+  shopMarka     String?
+  transport     String?
+  pincode       String
+  city          String
+  state         String
+  filePath      String?
+  sellerId      Int
+  seller        Seller   @relation(fields: [sellerId], references: [id])
+  createdAt     DateTime @default(now())
 }
+
+model Product {
+  id           Int      @id @default(autoincrement())
+  productName  String
+  averagePrice String
+  goodPrice    String
+  highPrice    String
+  description  String?
+  sellerId     Int
+  seller       Seller   @relation(fields: [sellerId], references: [id])
+  createdAt    DateTime @default(now())
+}
+
