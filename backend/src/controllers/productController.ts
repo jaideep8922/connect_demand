@@ -27,7 +27,7 @@ export const addProduct = async (req: any, res: any) => {
         });
 
         // Success response
-        sendSuccess(res, productData, "Product Added Successfully");
+        sendSuccess(res, productData.data, productData.message);
     } catch (error) {
         console.error('Error onboarding user:', error);
         sendError(res, 'Error onboarding user', error);
@@ -45,7 +45,7 @@ export const getProductBySellerId = async (req: any, res: any) => {
         const productList = await getProductList({
             sellerId,
         });
-        sendSuccess(res, productList, 'Product List Fetch Successfully')
+        sendSuccess(res, productList.data, productList.message)
     } catch (error) {
         console.error('Error fetching Product List:', error);
         sendError(res, 'Error fetching Product List:')
@@ -75,7 +75,7 @@ export const updateProductData = async (req: any, res: any) => {
             highPrice,
             description,
         });
-        sendSuccess(res, updatedData, 'Product List Fetch Successfully')
+        sendSuccess(res, updatedData.data, updatedData.message)
     } catch (error) {
         console.error('Error fetching Product List:', error);
         sendError(res, 'Error fetching Product List:')

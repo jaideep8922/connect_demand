@@ -79,14 +79,26 @@ export const addUser = async (userData: any) => {
   }
 };
 
-// export const getUserById = async (id: number) => {
-//   try {
-//     const user = await prisma.user.findUnique({
-//       where: { id },
-//     });
-//     return user;
-//   } catch (error) {
-//     console.error('Error fetching user by ID:', error);
-//     throw new Error('Failed to fetch user');
-//   }
-// };
+export const fetchRetailerById = async (id: number) => {
+  try {
+    const user = await prisma.retailer.findUnique({
+      where: { id },
+    });
+    return user;
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    throw new Error('Failed to fetch user');
+  }
+};
+
+export const fetchSellerById = async (id: number) => {
+  try {
+    const user = await prisma.seller.findUnique({
+      where: { id },
+    });
+    return user;
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    throw new Error('Failed to fetch user');
+  }
+};

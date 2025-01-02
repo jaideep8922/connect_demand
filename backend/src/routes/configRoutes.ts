@@ -6,7 +6,7 @@ import { getAllStatus } from '../controllers/configController';
 const app = express();
 app.use(cors());
 
-app.post('/create', getAllStatus);
+app.get('/getStatusList', getAllStatus);
 
 
 export default app;

@@ -1,4 +1,4 @@
-import {  addUser } from '../services/userRegisterService';
+import { addUser, fetchRetailerById, fetchSellerById } from '../services/userRegisterService';
 import { sendSuccess, sendError } from '../utils/responseHandle';
 
 // export const getAllUsers = async (req: any, res: any) => {
@@ -11,29 +11,49 @@ import { sendSuccess, sendError } from '../utils/responseHandle';
 //   }
 // };
 
-// export const getUserById = async (req: any, res: any) => {
-//   try {
-//     const { id } = req.params;
+export const getUserById = async (req: any, res: any) => {
+  try {
+    const { 
+      id,
+      userType,
+    } = req.body;
 
-//     // Validation
-//     if (!id || isNaN(Number(id))) {
-//       return res.status(400).json({ error: 'Invalid or missing user ID' });
-//     }
+    // Validation
+    if (!id) {
+      return res.status(400).json({ error: 'Invalid or missing user ID' });
+    }
 
-//     // Fetch user by ID
-//     const user = await fetchUserById(Number(id));
+    if (!id || !userType ) {
+      return res.status(400).json({ error: 'Missing required fields.' });
+    }
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+      if (userType == 'Retailer') {
+        const user = await fetchRetailerById(id);
 
-//     // Send success response
-//     sendSuccess(res, user, 'User fetched successfully');
-//   } catch (error) {
-//     console.error('Error fetching user by ID:', error);
-//     sendError(res, 'Error fetching user', error);
-//   }
-// };
+        if (!user) {
+          return res.status(404).json({ error: 'Retailer not found' });
+        }
+
+        // Send success response
+        sendSuccess(res, user, 'Retailer fetched successfully');
+      }
+      else if (userType == 'Supplier') {
+        const user = await fetchSellerById(id);
+
+        if (!user) {
+          return res.status(404).json({ error: 'Supplier not found' });
+        }
+
+        // Send success response
+        sendSuccess(res, user, 'Supplier fetched successfully');
+      }
+   
+
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    sendError(res, 'Error fetching user', error);
+  }
+};
 
 
 export const onBoardUser = async (req: any, res: any) => {
